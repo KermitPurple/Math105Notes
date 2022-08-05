@@ -44,6 +44,8 @@ cat << EOF > "$index"
 EOF
 
 for file in pdfs/*; do
-    title="$(basename -s .pdf "$file")"
+    # basename removes the "pdf/" and the ".pdf"
+    # cut removes the first two characters
+    title="$(basename -s .pdf "$file" | cut -c3-)"
     echo "<li><a href=\"$file\">$title</a></li>"
 done >> "$index"
