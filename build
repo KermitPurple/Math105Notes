@@ -40,12 +40,14 @@ cat << EOF > "$index"
         <h1>Math 105 Notes</h1>
         <p>Shane McDonough for Professor Ho</p>
         <p>last updated: $(date)</p>
-        <ol start="0">
+        <ol>
 EOF
 
 for file in pdfs/*; do
-    # basename removes the "pdf/" and the ".pdf"
-    # cut removes the first two characters
-    title="$(basename -s .pdf "$file" | cut -c3-)"
-    echo "<li><a href=\"$file\">$title</a></li>"
+    base="$(basename -s .pdf "$file")"
+    # first two characters
+    number="${base::2}"
+    # everything but first two
+    title="${base:2}"
+    echo "<li value=\"$number\"><a href=\"$file\">$title</a></li>"
 done >> "$index"
