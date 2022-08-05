@@ -1,0 +1,49 @@
+#!/bin/bash
+
+index='target/index.html'
+
+# paranoic rm
+rm -rf target
+mkdir target
+cp -r pdfs target/pdfs
+
+cat << EOF > "$index"
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Math 105 Notes</title>
+        <style>
+            html, body{
+                margin: 0;
+                padding: 0;
+                font-size: 1.2em;
+            }
+            
+            body{
+                margin: 0 auto;
+                max-width: 36em;
+                padding: 50px;
+            }
+
+            h1, p{
+                text-align: center;
+            }
+
+            a{
+                color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Math 105 Notes</h1>
+        <p>Shane McDonough and Professor Ho</p>
+        <p>last updated: $(date)</p>
+        <ol start="0">
+EOF
+
+for file in pdfs/*; do
+    title="$(basename -s .pdf "$file")"
+    echo "<li><a href=\"$file\">$title</a></li>"
+done >> "$index"
