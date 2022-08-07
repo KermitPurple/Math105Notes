@@ -34,20 +34,22 @@ cat << EOF > "$index"
             a{
                 color: black;
             }
+
+            .date {
+                font-size: .8rem;
+            }
         </style>
     </head>
     <body>
         <h1>Math 105 Notes</h1>
         <p>Shane McDonough for Professor Ho</p>
         <p>last updated: $(date)</p>
-        <ol>
+        <ol start="0">
 EOF
 
 for file in pdfs/*; do
     base="$(basename -s .pdf "$file")"
-    # first two characters
-    number="${base::2}"
-    # everything but first two
-    title="${base:2}"
-    echo "<li value=\"$number\"><a href=\"$file\">$title</a></li>"
+    date="${base::2}/${base:2:2}"
+    title="${base:4}"
+    echo "<li><a href=\"$file\">$title</a> <span class=date>$date</span></li>"
 done >> "$index"
