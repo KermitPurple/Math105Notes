@@ -43,13 +43,13 @@ cat << EOF > "$index"
     <body>
         <h1>Math 105 Notes</h1>
         <p>Shane McDonough for Professor Ho</p>
-        <p>last updated: $(date)</p>
+        <p>last updated: $(date "+%m/%d/%y")</p>
         <ol start="0">
 EOF
 
 for file in pdfs/*; do
     base="$(basename -s .pdf "$file")"
-    date="${base::2}/${base:2:2}"
-    title="${base:4}"
+    date="${base:2:2}/${base:4:2}/${base::2}"
+    title="${base:6}"
     echo "<li><a href=\"$file\">$title</a> <span class=date>$date</span></li>"
 done >> "$index"
