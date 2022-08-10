@@ -41,7 +41,7 @@ cat << EOF > "$index"
         </style>
     </head>
     <body>
-        <h1>Math 105 Notes</h1>
+        <h1>Math 105 Notes Fall 2022</h1>
         <p>Shane McDonough for Professor Ho</p>
         <p>last updated: $(date "+%m/%d/%y")</p>
         <ol start="0">
